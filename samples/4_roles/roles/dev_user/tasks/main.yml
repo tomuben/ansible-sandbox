@@ -1,0 +1,27 @@
+- name: Add the user 'johnd' with a specific uid and custom groups
+  become: yes
+  ansible.builtin.user:
+    name: "{{dev_user_name}}"
+    password: "{{ dev_user_password | password_hash('sha512') }}"
+    comment: John Doe
+    groups: "{{ dev_groups }}"
+    shell: /bin/bash
+- name: Copy the welcome message
+  become: yes
+  ansible.builtin.copy:
+    src: '{{ item }}'
+    dest: '/{{ item }}'
+    mode: '0644'
+    owner: "{{ dev_user_name }}"
+  with_items:
+    - 'home/{{dev_user_name}}/welcome.txt'
+
+- name: Modify bashrc
+  become: yes
+  ansible.builtin.template:
+    src: 'home/{{dev_user_name}}/.bashrc'
+    dest: '/home/{{dev_user_name}}/.bashrc'
+    owner: "{{dev_user_name}}"
+    mode: u=rw,go=r
+  vars:
+    welcome_file: "/home/{{dev_user_name}}/welcome.txt"

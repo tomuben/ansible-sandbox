@@ -1,0 +1,9 @@
+---
+
+apt_dependencies:
+  - apt-transport-https=2.0.9
+  - ca-certificates=20211016~20.04.1
+  - software-properties-common=0.99.9.8
+
+dev_user_name: johnd
+dev_user_password: "ansible_sandbox_123"

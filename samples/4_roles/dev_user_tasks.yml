@@ -1,0 +1,17 @@
+#- name: Update and upgrade apt packages
+#  apt:
+#    upgrade: yes
+#    update_cache: yes
+#  become: yes
+#- name: Install Docker
+#  include_role:
+#        name: docker
+- name: Install Dev user
+  include_role:
+      name: dev_user
+  vars:
+    dev_groups:
+      - sudo
+      - docker
+      - ubuntu
+

@@ -1,0 +1,8 @@
+- name: Run Dev user Setup
+  hosts: ec2
+  vars:
+      ansible_python_interpreter: /usr/bin/python3
+      user_name: ubuntu
+  remote_user: ubuntu
+  tasks:
+  - import_tasks: dev_user_tasks.yml
