@@ -1,0 +1,25 @@
+- name: Simple Playbook
+  hosts: ec2
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+  remote_user: ubuntu
+  tasks:
+  - name: save the lists as a Fact
+    set_fact:
+      a: "{{ a }}"
+      b: "{{ b}} "
+    vars:
+      a: [1, 2, 3, 3, 4, 8, 10]
+      b: [1, 2, 2, 5, 10]
+  - name: Debug unique
+    debug:
+      msg: "Unique values of a are {{ a | unique}}"
+  - name: Intersect
+    debug:
+      msg: "Intersection of a and b are {{ a | intersect(b)}}"
+  - name: Union
+    debug:
+      msg: "Union of a and b are {{ a | union(b)}}"
+  - name: Difference
+    debug:
+      msg: "Difference of a and b are {{ a | difference(b)}}"

@@ -1,0 +1,11 @@
+- name: Simple Playbook
+  hosts: ec2
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+  remote_user: ubuntu
+  tasks:
+   - name: Send a debug message
+     debug:
+       msg: "Hello {{ greeting_target | default('you') }} from {{ ansible_hostname }}"
+#     vars:
+#       greeting_target: "Integration team"

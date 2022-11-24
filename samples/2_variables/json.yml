@@ -1,0 +1,26 @@
+- name: Simple Playbook
+  hosts: ec2
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+  remote_user: ubuntu
+  tasks:
+  - name: save the Json data to a Variable as a Fact
+    set_fact:
+      fruits: "{{ my_fruits  }}"
+    vars:
+      my_fruits:
+        fruits:
+          - fruit: apple
+            color: red
+          - fruit: pear
+            color: yellow
+          - fruit: grapefruit
+            color: yellow
+  - name: Debug json
+    debug:
+      msg: "The fuits are {{ fruits | to_json}}"
+  - name: Filter json
+    debug:
+      msg: "The apple is {{ fruits | json_query(apple_query) }}"
+    vars:
+      apple_query: "fruits[?fruit == 'apple'].color"
