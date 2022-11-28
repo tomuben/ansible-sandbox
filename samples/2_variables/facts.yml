@@ -1,0 +1,19 @@
+- name: Simple Playbook
+  hosts: ec2
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+  remote_user: ubuntu
+  tasks:
+  - name: Print all facts
+    debug:
+      msg: "{{ ansible_facts }}"
+
+  - name: Print target host Python version, Option 1
+    debug:
+      msg: "{{ ansible_facts.python_version }}"
+  - name: Print target host Python version, Option 2
+    debug:
+      msg: "{{ ansible_facts['python_version'] }}"
+  - name: Print target host Python version, Option 3
+    debug:
+      msg: "{{ ansible_python_version }}"

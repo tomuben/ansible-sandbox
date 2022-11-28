@@ -1,0 +1,12 @@
+- name: Simple Playbook
+  hosts: ec2
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+  remote_user: ubuntu
+  tasks:
+  - name: Get the hostname and save in a variable
+    shell: "hostname -I"
+    register: test_host_ip
+  - name: Print the IP
+    debug:
+      msg: "The ip address is {{ test_host_ip.stdout }}"
